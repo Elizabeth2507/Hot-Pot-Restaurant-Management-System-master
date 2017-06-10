@@ -1,0 +1,76 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model DishViewResult
+@{ ViewBag.Title = "Edit dishes"; Layout = "~/Views/Shared/FrontDesk_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dish/index">Dishes inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dish/addpage">New dishes</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        <div>
+            @{ var categories = ViewBag.Categories as SelectList; }
+            @{ Html.BeginForm("Edit", "Dish", new { id = Model.ID }, FormMethod.Post); }
+
+            <div>
+                @Html.LabelFor(w => w.ShortID)
+                @Html.TextBoxFor(w => w.ShortID)
+
+                @Html.LabelFor(w => w.Name)
+                @Html.TextBoxFor(w => w.Name)
+
+                @Html.LabelFor(w => w.ShortName)
+                @Html.TextBoxFor(w => w.ShortName)
+
+                @Html.LabelFor(w => w.CategoryID)
+                @Html.DropDownListFor(c => c.CategoryID, categories)
+
+                @Html.LabelFor(w => w.Price)
+                @Html.TextBoxFor(w => w.Price)
+
+                <br />
+                <br />
+
+                @Html.LabelFor(w => w.Unit)
+                @Html.TextBoxFor(w => w.Unit)
+
+                @Html.LabelFor(w => w.Description)
+                @Html.TextBoxFor(w => w.Description)
+
+                @Html.LabelFor(w => w.UnitConversion)
+                @Html.TextBoxFor(w => w.UnitConversion)
+
+                <br />
+                <br />
+
+                @Html.CheckBoxFor(w => w.PriceEditable)
+                @Html.LabelFor(w => w.PriceEditable)
+
+                @Html.CheckBoxFor(w => w.InventoryControl)
+                @Html.LabelFor(w => w.InventoryControl)
+            </div>
+
+            <div id="divValidation" class="validation-summary-errors">
+                <ul id="ulValidation"></ul>
+            </div>
+            <div>@Html.ValidationSummary()</div>
+            <br />
+            <input type="submit" value="Save changes" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div>
+            <br />
+            @{ Html.BeginForm("Delete", "Dish", new { id = Model.ID }, FormMethod.Post); }
+            <input type="submit" value="Removethemenu" class="inputSubmit" style="color: red" />
+            @{ Html.EndForm(); }
+        </div>
+    </div>
+</td>

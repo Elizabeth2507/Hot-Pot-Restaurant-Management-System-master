@@ -1,0 +1,115 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model UserViewResult
+@{ ViewBag.Title = "User query"; Layout = "~/Views/Shared/System_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/user/index">User query</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/user/addpage">New users</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divCenterContent">
+        <div class="divQuery">
+            @{ 
+                var queryConditions = ViewBag.QueryConditions as UserQueryConditions;
+                var userRoles = ViewBag.UserRoles as SelectList;
+            }
+            @{ Html.BeginForm("Index", "User", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="ShortID" class="labelQuery">Query number</label>
+            <input data-val="true" data-val-number="The query number requires a valid number" name="ShortID" type="text" value="@queryConditions.ShortID" class="inputQuery"/>
+
+            <label for="UserName" class="labelQuery">User name</label>
+            <input name="UserName" type="text" value="@queryConditions.UserName" class="inputQuery" />
+
+            <label for="Role" class="labelQuery">Role</label>
+            @Html.DropDownList("Role", userRoles, new { @class = "inputQuery" })
+
+            <label for="RealName" class="labelQuery">Real name</label>
+            <input name="RealName" type="text" value="@queryConditions.RealName" class="inputQuery" />
+
+            <label for="RealPost" class="labelQuery">Position</label>
+            <input name="RealPost" type="text" value="@queryConditions.RealPost" class="inputQuery" />
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div class="divTable">
+            @{ var viewResults = ViewBag.ViewResults as List<UserViewResult>; }
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Query number</th>
+                    <th class="thVInventory">User name</th>
+                    <th class="thVInventory">Role</th>
+                    <th class="thVInventory">Real Name</th>
+                    <th class="thVInventory">Position</th>
+                    <th class="thVInventory" colspan="2">Management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    var roleName = userRoles.FirstOrDefault(r => r.Value == viewResult.Role.ToString()).Text;
+                    
+                    <tr>
+                        <td class="tdVInventory">@viewResult.ShortID</td>
+                        <td class="tdVInventory">@viewResult.UserName</td>
+                        <td class="tdVInventory">@roleName</td>
+                        <td class="tdVInventory">@viewResult.RealName</td>
+                        <td class="tdVInventory">@viewResult.RealPost</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/user/editpage/@viewResult.ID" class="aVInventory">Edit</a>
+                        </td>
+                        <td class="tdVInventory">
+                            <a href="~/user/passwordpage/@viewResult.ID" class="aVInventory">Change password</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('user', 'index', @previousPage)" id="inputPreviousPage" value="Previous page " type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('user','index', null)" id="inputGoToPage" value="Go to " type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('user', 'index', @nextPage)" id="inputNextPage" value="Next page " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name= "UserName"]').autocomplete({
+                serviceUrl: '/autocomplete/usersusername',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+
+            $('[name = "RealName"]').autocomplete({
+                serviceUrl: '/autocomplete/usersrealname',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}

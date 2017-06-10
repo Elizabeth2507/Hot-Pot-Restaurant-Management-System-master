@@ -1,0 +1,124 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model DiscountQueryConditions
+@{ ViewBag.Title = "Discount inquiries"; Layout = "~/Views/Shared/FrontDesk_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/discount/index">Discount inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/discount/addpage">Add a discount</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divCenterContent">
+        <div class="divQuery">
+            @{ 
+                var queryConditions = ViewBag.QueryConditions as DiscountQueryConditions;
+                var selectBool = ViewBag.SelectBool as SelectList;
+            }
+            @{ Html.BeginForm("Index", "Discount", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="DiscountPercent" class="labelQuery">Discount (percentage)</label>
+            <input name="DiscountPercentMin" type="text" value="@queryConditions.DiscountPercentMin" class="inputQuery" data-val="true" data-val-number="The discount requires a valid number" />
+            ~
+            <input name="DiscountPercentMax" type="text" value="@queryConditions.DiscountPercentMax" class="inputQuery" data-val="true" data-val-number="The discount requires a valid number" />
+
+            <label for="Description" class="labelQuery">Description</label>
+            <input name="Description" type="text" value="@queryConditions.Description" class="inputQuery" />
+
+            <label for="IgnoredCategories" class="labelQuery">Does not include dishes in the discount</label>
+            <input name="IgnoredCategories" type="text" value="@queryConditions.IgnoredCategories" class="inputQuery" />
+
+            <br />
+
+            @{                
+                if (Model.IgnoredProperties.Contains("IsMemberOnly"))
+                {
+                <label for="IsMemberOnly">Whether the membership is limited</label>
+                <select data-val="true" data-val-required="Missing member limit setting" id="IsMemberOnly" name="IsMemberOnly">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                    <option selected="selected" value="all">All</option>
+                </select>
+                }
+                else
+                {
+                <label for="IsMemberOnly" class="labelQuery">Whether the membership is limited</label>
+                @Html.DropDownList("IsMemberOnly", selectBool)                            
+                }
+            }
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div class="divTable">
+            @{ var viewResults = ViewBag.ViewResults as List<DiscountViewResult>; }
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Discount (percentage)</th>
+                    <th class="thVInventory">Description</th>
+                    <th class="thVInventory">Does not include dishes in the discount</th>
+                    <th class="thVInventory">Whether the membership is limited</th>
+                    <th class="thVInventory">Management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    var isMemberOnly = viewResult.IsMemberOnly == true ? "Yes" : "No";
+                        
+                    <tr>
+                        <td class="tdVInventory">@viewResult.DiscountPercent</td>
+                        <td class="tdVInventory">@viewResult.Description</td>
+                        <td class="tdVInventory">@viewResult.IgnoredCategories</td>
+                        <td class="tdVInventory">@isMemberOnly</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/discount/editpage/@viewResult.ID" class="aVInventory">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('discount', 'index', @previousPage)" id="inputPreviousPage" value="Previous page" type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('discount','index', null)" id="inputGoToPage" value="Go to" type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('discount', 'index', @nextPage)" id="inputNextPage" value="Go to " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name= "Description"]').autocomplete({
+                serviceUrl: '/autocomplete/discounts',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+
+            $('[name = "IgnoredCategories"]').autocomplete({
+                serviceUrl: '/autocomplete/categories',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}

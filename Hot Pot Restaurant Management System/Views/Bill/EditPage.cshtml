@@ -1,0 +1,95 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model BillViewResult
+@{ ViewBag.Title = "Edit the bill"; Layout = "~/Views/Shared/Bill_Layout.cshtml"; }
+
+<div id="divContent">
+    <div>
+        @{ 
+            var rowDetailsCount = Model.Details.Count() - 1;
+            var timePeriod = ViewBag.TimePeriod;
+        }
+        @{ Html.BeginForm("edit", "bill", new
+           {
+               id = Model.ID,
+               TimePeriod = Model.TimePeriod,
+               UserID = Model.UserID,
+               UserName = Model.UserName,
+               date = Model.Date,
+           }, FormMethod.Post, new { id = "formPost" }); }
+
+        <div id="divEdit">
+            @Html.LabelFor(w => w.ID)
+            <span class="spanLong">@Model.ID</span>
+
+            @Html.LabelFor(w => w.TableID)
+            @Html.TextBoxFor(w => w.TableID)
+
+            @Html.LabelFor(w => w.CustomerCount)
+            @Html.TextBoxFor(w => w.CustomerCount)
+
+            @Html.LabelFor(w => w.TimePeriod)
+            <span class="spanShort">@timePeriod</span>
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.UserID)
+            <span class="spanShort">@Model.UserID</span>
+
+            @Html.LabelFor(w => w.UserName)
+            <span class="spanShort">@Model.UserName</span>
+
+            @Html.LabelFor(w => w.Date)
+            <span class="spanLong">@Model.Date</span>
+
+            @Html.LabelFor(w => w.Remark)
+            @Html.TextBoxFor(w => w.Remark)
+
+            <br />
+            <br />
+
+            @for (int i = 0; i < Model.Details.Count(); i++)
+            {
+                var divID = "divNewEdit" + i;
+                var buttonDeleteID = "buttonDelete" + i;
+                
+                <div id="@divID">
+                    @Html.LabelFor(w => w.Details[i].DishName)
+                    @Html.TextBoxFor(w => w.Details[i].DishName)
+
+                    @Html.LabelFor(w => w.Details[i].Amount)
+                    @Html.TextBoxFor(w => w.Details[i].Amount)
+
+                    <input type="button" value ="delete" onclick="DeleteEditBlanks(@i, @rowDetailsCount)" class ="inputSubmit" id="@buttonDeleteID" />
+
+                    <br />
+                    <br />
+                </div> 
+            }
+        </div>
+
+        <div id="divValidation" class="validation-summary-errors">
+            <ul id="ulValidation"></ul>
+        </div>
+        <div>@Html.ValidationSummary()</div>
+        <br />
+        <input type="button" value="Add dishes" class="inputSubmit" onclick="CreateEditBlanks(@rowDetailsCount)" />
+        <input type="submit" value="Save changes" class="inputSubmit" onclick="return CheckForm()" />
+        @{ Html.EndForm(); }
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[data-val-required = "Missing menu name"]').autocomplete({
+                serviceUrl: '/autocomplete/dishes',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}

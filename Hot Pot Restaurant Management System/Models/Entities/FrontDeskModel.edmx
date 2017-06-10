@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FrontDeskModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FrontDeskModelStoreContainer">
+    <EntitySet Name="Dish" EntityType="FrontDeskModel.Store.Dish" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServingTable" EntityType="FrontDeskModel.Store.ServingTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BillDetails" EntityType="FrontDeskModel.Store.BillDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Discount" EntityType="FrontDeskModel.Store.Discount" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bill" EntityType="FrontDeskModel.Store.Bill" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VBill" EntityType="FrontDeskModel.Store.VBill" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Member" EntityType="FrontDeskModel.Store.Member" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Dish">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShortID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ShortName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Image" Type="varchar(max)" Nullable="true" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+    <Property Name="PriceEditable" Type="bit" Nullable="false" />
+    <Property Name="InventoryControl" Type="bit" Nullable="false" />
+    <Property Name="UnitConversion" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ServingTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="BillID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BillDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DishName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="WarehouseID" Type="int" Nullable="true" />
+    <Property Name="POID" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DiscountPercent" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="IgnoredCategories" Type="varchar(max)" Nullable="true" />
+    <Property Name="IsMemberOnly" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="TableID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="CustomerCount" Type="int" Nullable="false" />
+    <Property Name="TimePeriod" Type="int" Nullable="false" />
+    <Property Name="TotalCost" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="int" Nullable="true" />
+    <Property Name="DiscountType" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ExactCost" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="MemberID" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ReceivedMoney" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Change" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="VBill">
+    <Key>
+      <PropertyRef Name="BillID" />
+      <PropertyRef Name="TableID" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="CustomerCount" />
+      <PropertyRef Name="TimePeriod" />
+      <PropertyRef Name="TotalCost" />
+      <PropertyRef Name="ExactCost" />
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="DetailsID" />
+      <PropertyRef Name="DishName" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="ReceivedMoney" />
+      <PropertyRef Name="Change" />
+    </Key>
+    <Property Name="BillID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="TableID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="CustomerCount" Type="int" Nullable="false" />
+    <Property Name="TimePeriod" Type="int" Nullable="false" />
+    <Property Name="TotalCost" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="int" Nullable="true" />
+    <Property Name="DiscountType" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ExactCost" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DetailsID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DishName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="MemberID" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ReceivedMoney" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Change" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Tele" Type="varchar" Nullable="false" MaxLength="25" />
+    <Property Name="Point" Type="int" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FrontDeskModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FrontDeskEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Dish" EntityType="FrontDeskModel.Dish" />
+          <EntitySet Name="ServingTable" EntityType="FrontDeskModel.ServingTable" />
+          <EntitySet Name="BillDetails" EntityType="FrontDeskModel.BillDetails" />
+          <EntitySet Name="Discount" EntityType="FrontDeskModel.Discount" />
+          <EntitySet Name="Bill" EntityType="FrontDeskModel.Bill" />
+          <EntitySet Name="VBill" EntityType="FrontDeskModel.VBill" />
+          <EntitySet Name="Member" EntityType="FrontDeskModel.Member" />
+        </EntityContainer>
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ShortID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShortName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="PriceEditable" Nullable="false" />
+          <Property Type="Boolean" Name="InventoryControl" Nullable="false" />
+          <Property Type="Double" Name="UnitConversion" />
+        </EntityType>
+        <EntityType Name="ServingTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="BillID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BillDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DishName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="OrderID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="WarehouseID" />
+          <Property Type="String" Name="POID" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DiscountPercent" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="IgnoredCategories" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsMemberOnly" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TableID" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CustomerCount" Nullable="false" />
+          <Property Type="Int32" Name="TimePeriod" Nullable="false" />
+          <Property Type="Decimal" Name="TotalCost" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="Discount" />
+          <Property Type="String" Name="DiscountType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ExactCost" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MemberID" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ReceivedMoney" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Change" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="VBill">
+          <Key>
+            <PropertyRef Name="BillID" />
+            <PropertyRef Name="TableID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="CustomerCount" />
+            <PropertyRef Name="TimePeriod" />
+            <PropertyRef Name="TotalCost" />
+            <PropertyRef Name="ExactCost" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="DetailsID" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="ReceivedMoney" />
+            <PropertyRef Name="Change" />
+          </Key>
+          <Property Type="String" Name="BillID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TableID" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CustomerCount" Nullable="false" />
+          <Property Type="Int32" Name="TimePeriod" Nullable="false" />
+          <Property Type="Decimal" Name="TotalCost" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="Discount" />
+          <Property Type="String" Name="DiscountType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ExactCost" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DetailsID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DishName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="MemberID" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ReceivedMoney" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Change" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tele" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Point" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FrontDeskModelStoreContainer" CdmEntityContainer="FrontDeskEntities">
+    <EntitySetMapping Name="Dish">
+      <EntityTypeMapping TypeName="IsTypeOf(FrontDeskModel.Dish)">
+        <MappingFragment StoreEntitySet="Dish">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ShortID" ColumnName="ShortID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PriceEditable" ColumnName="PriceEditable" />
+          <ScalarProperty Name="InventoryControl" ColumnName="InventoryControl" />
+          <ScalarProperty Name="UnitConversion" ColumnName="UnitConversion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServingTable">
+      <EntityTypeMapping TypeName="IsTypeOf(FrontDeskModel.ServingTable)">
+        <MappingFragment StoreEntitySet="ServingTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BillID" ColumnName="BillID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(FrontDeskModel.BillDetails)">
+        <MappingFragment StoreEntitySet="BillDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DishName" ColumnName="DishName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+          <ScalarProperty Name="POID" ColumnName="POID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Discount">
+      <EntityTypeMapping TypeName="IsTypeOf(FrontDeskModel.Discount)">
+        <MappingFragment StoreEntitySet="Discount">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IgnoredCategories" ColumnName="IgnoredCategories" />
+          <ScalarProperty Name="IsMemberOnly" ColumnName="IsMemberOnly" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bill">
+      <EntityTypeMapping TypeName="IsTypeOf(FrontDeskModel.Bill)">
+        <MappingFragment StoreEntitySet="Bill">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TableID" ColumnName="TableID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustomerCount" ColumnName="CustomerCount" />
+          <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+          <ScalarProperty Name="ExactCost" ColumnName="ExactCost" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="ReceivedMoney" ColumnName="ReceivedMoney" />
+          <ScalarProperty Name="Change" ColumnName="Change" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VBill">
+      <EntityTypeMapping TypeName="IsTypeOf(FrontDeskModel.VBill)">
+        <MappingFragment StoreEntitySet="VBill">
+          <ScalarProperty Name="BillID" ColumnName="BillID" />
+          <ScalarProperty Name="TableID" ColumnName="TableID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustomerCount" ColumnName="CustomerCount" />
+          <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="ExactCost" ColumnName="ExactCost" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="DetailsID" ColumnName="DetailsID" />
+          <ScalarProperty Name="DishName" ColumnName="DishName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ReceivedMoney" ColumnName="ReceivedMoney" />
+          <ScalarProperty Name="Change" ColumnName="Change" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Member">
+      <EntityTypeMapping TypeName="IsTypeOf(FrontDeskModel.Member)">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Tele" ColumnName="Tele" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

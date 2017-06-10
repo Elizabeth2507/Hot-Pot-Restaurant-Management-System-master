@@ -1,0 +1,48 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model DiscountViewResult
+@{ ViewBag.Title = "Add a Discount"; Layout = "~/Views/Shared/FrontDesk_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/discount/index">Discount inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/discount/addpage">Add a discount</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        <div>
+            @{ Html.BeginForm("Add", "Discount", FormMethod.Post); }
+
+            <div>
+                @Html.LabelFor(w => w.DiscountPercent)
+                @Html.TextBoxFor(w => w.DiscountPercent)
+
+                @Html.LabelFor(w => w.Description)
+                @Html.TextBoxFor(w => w.Description)
+
+                @Html.LabelFor(w => w.IgnoredCategories)
+                @Html.TextBoxFor(w => w.IgnoredCategories)
+
+                <br />
+                <br />
+
+                @Html.CheckBoxFor(w => w.IsMemberOnly)
+                @Html.LabelFor(w => w.IsMemberOnly)
+            </div>
+
+            <div id="divValidation" class="validation-summary-errors">
+                <ul id="ulValidation"></ul>
+            </div>
+            <div>@Html.ValidationSummary()</div>
+            <br />
+            <input type="submit" value="Save changes" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+    </div>
+</td>

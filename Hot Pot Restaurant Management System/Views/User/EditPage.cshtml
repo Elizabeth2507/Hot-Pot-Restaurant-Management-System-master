@@ -1,0 +1,65 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model UserViewResult
+@{ ViewBag.Title = "Edit the user"; Layout = "~/Views/Shared/System_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/user/index">User query</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/user/addpage">New users</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        <div>
+            @{ var userRoles = ViewBag.UserRoles as IEnumerable<SelectListItem>; }
+            @{ Html.BeginForm("Edit", "User", new { id = Model.ID }, FormMethod.Post, new { id = "formPost" }); }
+
+            <div>
+                @Html.LabelFor(w => w.ShortID)
+                @Html.TextBoxFor(w => w.ShortID)
+
+                @Html.LabelFor(w => w.UserName)
+                @Html.TextBoxFor(w => w.UserName)
+
+                <input type="hidden" id="Password" name="Password" value="null" />
+
+                @Html.LabelFor(w => w.Role)
+                @Html.DropDownListFor(w => w.Role, userRoles)
+
+                <br />
+                <br />
+
+                @Html.LabelFor(w => w.RealName)
+                @Html.TextBoxFor(w => w.RealName)
+
+                @Html.LabelFor(w => w.RealPost)
+                @Html.TextBoxFor(w => w.RealPost)
+            </div>
+
+            <div id="divValidation" class="validation-summary-errors">
+                <ul id="ulValidation"></ul>
+            </div>
+            <div>@Html.ValidationSummary()</div>
+            <br />
+            <input type="submit" value="Save changes" class="inputSubmit" onclick="return EncryptPassword()" />
+            @{ Html.EndForm(); }
+        </div>
+        <div>
+            <br />
+            @{ Html.BeginForm("Delete", "User", new { id = Model.ID }, FormMethod.Post); }
+            <input type="submit" value="Delete" class="inputSubmit" style="color: red" />
+            @{ Html.EndForm(); }
+        </div>
+    </div>
+</td>
+
+
+
+
+

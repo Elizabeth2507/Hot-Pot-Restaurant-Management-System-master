@@ -1,0 +1,59 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@{ ViewBag.Title = "Opening information"; Layout = "~/Views/Shared/Bill_Layout.cshtml"; }
+
+<div id="divServingTable">
+    <div>
+        @{ 
+            var servingTables = ViewBag.ServingTables as List<ServingTableViewResult>;
+            int i;
+        }
+        <div class="divTable">
+            <table class="tableVInventory">
+                @{
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                }
+                @for (i = 0; i < servingTables.Count(); i += 10)
+                {
+                    var iRest = servingTables.Count() - i;
+                    if (iRest < 10 && iRest % 10 != 0)
+                    {
+                    <tr>
+                        @{ int iMax = iRest % 10;
+                           for (int j = i; j < i + iMax; j++)
+                           {
+                            <td class="tdServingTable">@servingTables[j].ID</td>
+                           } 
+                        }
+                    </tr>
+                    }
+                    else
+                    {
+                    <tr>
+                        <td class="tdServingTable">@servingTables[i].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 1].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 2].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 3].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 4].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 5].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 6].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 7].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 8].ID</td>
+                        <td class="tdServingTable">@servingTables[i + 9].ID</td>
+                    </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>

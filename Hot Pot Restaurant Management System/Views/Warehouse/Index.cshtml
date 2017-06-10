@@ -1,0 +1,85 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model WarehouseViewResult
+@{ ViewBag.Title = "Warehouse query"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/warehouse/index">Warehouse query</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/warehouse/addpage">Add a warehouse</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td  id="tdContent">
+    <div id="divCenterContent">
+        <div class="divQuery">
+            @{ var queryConditions = ViewBag.QueryConditions as WarehouseQueryConditions; }
+            @{ Html.BeginForm("Index", "Warehouse", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="ShortID" class="labelQuery">Query number</label>
+            <input data-val="true" data-val-number="The query number requires a valid number" name="ShortID" type="text" value="@queryConditions.ShortID" class="inputQuery"/>
+
+            <label for="Name" class="labelQuery">Warehouse name</label>
+            <input name="Name" type="text" value="@queryConditions.Name" class="inputQuery" />
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div class="divTable">
+            @{ var viewResults = ViewBag.ViewResults as List<WarehouseViewResult>; }
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Query number</th>
+                    <th class="thVInventory">Warehouse name</th>
+                    <th class="thVInventory">Management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    <tr>
+                        <td class="tdVInventory">@viewResult.ShortID</td>
+                        <td class="tdVInventory">@viewResult.Name</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/warehouse/editpage/@viewResult.ID" class="aVInventory">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('warehouse', 'index', @previousPage)" id="inputPreviousPage" value="Previous page" type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('warehouse','index', null)" id="inputGoToPage" value="Go to " type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('warehouse', 'index', @nextPage)" id="inputNextPage" value="Next page " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name= "Name"]').autocomplete({
+                serviceUrl: '/autocomplete/warehouses',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}
+

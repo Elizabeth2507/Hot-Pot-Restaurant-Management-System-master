@@ -1,0 +1,301 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: gray;
+    background-color: #fff;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* Custom style
+-----------------------------------------------------------*/
+input {
+    border: solid 0.5px gray;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+    font-weight: bold;
+}
+
+#tableTopTitle {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#tdSystemName {
+    width: 20%;
+    font-size:large;
+    font-weight:bold;
+}
+
+#tdUserInfo {
+    width: 80%;
+    text-align:right;
+    font-weight:bold;
+}
+
+#tableMain {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#trIndex {
+    height: 5%;
+    background-color: cornflowerblue;
+    font-weight: bold;
+    color: white;
+}
+
+#tdIndex {
+    text-align: right;
+    width: 100%;
+}
+
+#trTitle {
+    height: 5%;
+    background-color: cornflowerblue;
+    font-weight: bold;
+    color: white;
+}
+
+#tdMenuTitle {
+    text-align: left;
+    width: 20%;
+}
+
+#tdContentTitle {
+    text-align: right;
+    width: 80%;
+}
+
+.aTitleLink {
+    color: white;
+}
+
+#trContent {
+    height: 90%;
+    text-align: start;
+}
+
+#divMenu {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#tableMenu {
+    width: 100%;
+    text-align: center;
+    border: none;
+}
+
+.trMenu {
+    height: 40px;
+}
+
+.tdMenu {
+    background-color: palegreen;
+}
+
+#tdContent {
+    text-align: left;
+}
+
+#divContent {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    border:solid;
+    border-color: white;
+    border-width: 10px;
+}
+
+.inputSubmit {
+    background: none;
+    background-color: white;
+    border: solid;
+    border-width: thin;
+    border-color: steelblue;
+    color: steelblue;
+    font-weight: bold;
+    width:100px;
+}
+
+.tableVInventory {
+    border: none;
+    width: 100%;
+}
+
+.thVInventory {
+    background-color: palegreen;
+}
+
+.tdVInventory {
+    background-color: aliceblue;
+    width: 25px;
+}
+
+.inputEdit {
+    margin: 4px;
+}
+
+.divTable {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.tdServingTable {
+    background-color: aliceblue;
+    width: 100px;
+}
+
+#divServingTable {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+.divQuery {
+    text-align: left;
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: bold;
+}
+
+.labelQuery {
+    margin: 3px;
+}
+
+.inputQuery {
+    margin: 3px;
+}
+
+.spanShort {
+    text-align: center;
+    display: inline-block;
+    width: 50px;
+}
+
+.spanMiddle {
+    text-align: center;
+    display: inline-block;
+    width: 100px;
+}
+
+.spanLong {
+    text-align: center;
+    display: inline-block;
+    width: 150px;
+}
+
+.aVInventory {
+    text-decoration: none;
+    color: cornflowerblue;
+    font-weight: bold;
+}
+
+#tableCurrentUser {
+    text-align: left;
+    width: 300px;
+    height: 200px;
+}
+
+#divCenterContent {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.liTree {
+    width: 100px;
+}
+
+.aTree {
+    width: 100%;
+    font-size: medium;
+    color: steelblue;
+}
+
+.formLogin {
+    text-align: right;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.autocomplete-suggestions {
+    border: 1px solid #999;
+    background: #FFF;
+    overflow: auto;
+}
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.autocomplete-selected {
+    background: #F0F0F0;
+}
+.autocomplete-suggestions strong {
+    font-weight: normal;
+    color: #3399FF;
+}

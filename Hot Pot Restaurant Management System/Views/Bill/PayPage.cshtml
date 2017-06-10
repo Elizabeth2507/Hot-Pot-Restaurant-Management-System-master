@@ -1,0 +1,113 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model BillViewResult
+@{ ViewBag.Title = "Checkout"; Layout = "~/Views/Shared/Bill_Layout.cshtml"; }
+
+<div id="divContent">
+    <div>
+        @{ var timePeriod = ViewBag.TimePeriod; }
+        @{ Html.BeginForm("pay", "bill", new
+           {
+               ID = Model.ID,
+               TableID = Model.TableID,
+               CustomerCount = Model.CustomerCount,
+               TimePeriod = Model.TimePeriod,
+               UserID = Model.UserID,
+               UserName = Model.UserName,
+               Date = Model.Date,
+               Remark = Model.Remark,
+               Details = Model.Details,
+               Discount = Model.Discount,
+               DiscountType = Model.DiscountType,
+               MemberID = Model.MemberID,
+               TotalCost = Model.TotalCost,
+               ExactCost = Model.ExactCost
+           }, FormMethod.Post, new { id = "formPost" }); }
+
+        <div id="divEdit">
+            @Html.LabelFor(w => w.ID)
+            <span class="spanLong">@Model.ID</span>
+
+            @Html.LabelFor(w => w.TableID)
+            <span class="spanShort">@Model.TableID</span>
+
+            @Html.LabelFor(w => w.CustomerCount)
+            <span class="spanShort">@Model.CustomerCount</span>
+
+            @Html.LabelFor(w => w.TimePeriod)
+            <span class="spanShort">@timePeriod</span>
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.UserID)
+            <span class="spanShort">@Model.UserID</span>
+
+            @Html.LabelFor(w => w.UserName)
+            <span class="spanShort">@Model.UserName</span>
+
+            @Html.LabelFor(w => w.Date)
+            <span class="spanLong">@Model.Date</span>
+
+            @Html.LabelFor(w => w.Remark)
+            <span>@Model.Remark</span>
+
+            <br />
+            <br />
+
+            @for (int i = 0; i < Model.Details.Count(); i++)
+            {
+                var divID = "divNewEdit" + i;
+                var buttonDeleteID = "buttonDelete" + i;
+                
+                <div id="@divID">
+                    @Html.LabelFor(w => w.Details[i].DishName)
+                    <span class="spanMiddle">@Model.Details[i].DishName</span>
+
+                    @Html.LabelFor(w => w.Details[i].Amount)
+                    <span class="spanShort">@Model.Details[i].Amount</span>
+
+                    <br />
+                    <br />
+                </div> 
+            }
+
+            @Html.LabelFor(w => w.DiscountType)
+            <span class="spanLong">@Model.DiscountType</span>
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.MemberID)
+            <span class="spanLong">@Model.MemberID</span>
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.TotalCost)
+            <span class="spanMiddle">@Model.TotalCost</span>
+
+            @Html.LabelFor(w => w.ExactCost)
+            <span class="spanMiddle">@Model.ExactCost</span>
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.ReceivedMoney)
+            @Html.TextBoxFor(w => w.ReceivedMoney)
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.Change)
+            @Html.TextBoxFor(w => w.Change)
+        </div>
+
+        <div id="divValidation" class="validation-summary-errors">
+            <ul id="ulValidation"></ul>
+        </div>
+        <div>@Html.ValidationSummary()</div>
+        <br />
+        <input type="submit" value="Checkout" class="inputSubmit" onclick="return CheckForm()" />
+        @{ Html.EndForm(); }
+    </div>
+</div>

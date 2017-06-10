@@ -1,0 +1,61 @@
+﻿@{ Layout = null; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div style="height: 50px; text-align: center">
+        <h1>Restaurant Management System</h1>
+    </div>
+    <div style="height: 500px; text-align: center">
+        <table style="width: 100%; height: 100%">
+            <tr style="width: 100%; height: 15%">
+                <td style="width: 37%"></td>
+                <td style="width: 20%"></td>
+                <td style="width: 43%"></td>
+            </tr>
+            <tr style="width: 100%; height: 30%">
+                <td></td>
+                <td>
+
+                    @{ Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "formLogin", id = "formPost" }); }
+
+                    <div>
+                        <label for="UserName">User name</label>
+                        <input data-val="true" data-val-required="Missing user name" id="UserName" name="UserName" type="text" />
+
+                        <br />
+                        <br />
+
+                        <label for="UserName">Password</label>
+                        <input data-val="true" data-val-required="Missing password" id="Password" name="Password" type="password" />
+                    </div>
+
+                    <div id="divValidation" class="validation-summary-errors">
+                        <ul id="ulValidation"></ul>
+                    </div>
+                    <div>@Html.ValidationSummary()</div>
+                    <br />
+                    <input type="submit" value="Log  In" class="inputSubmit" onclick="return EncryptPassword()"/>
+
+                    @{ Html.EndForm(); }
+
+                </td>
+                <td></td>
+            </tr>
+            <tr style="width: 100%; height: 55%"></tr>
+        </table>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/SHA1.js")
+    @Scripts.Render("~/Scripts/MyScript.js")
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

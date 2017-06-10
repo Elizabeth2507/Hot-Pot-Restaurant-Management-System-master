@@ -1,0 +1,97 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model CategoryViewResult
+@{ ViewBag.Title = "Classification query"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/index">Classification query</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/addpage">Add a new category</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/treepage">Tree view</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divCenterContent">
+        <div class="divQuery">
+            @{ 
+                var queryConditions = ViewBag.QueryConditions as CategoryQueryConditions;
+                var categories = ViewBag.Categories as SelectList;
+            }
+            @{ Html.BeginForm("Index", "Category", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="ShortID" class="labelQuery">Query number</label>
+            <input data-val="true" data-val-number="The query number requires a valid number" name="ShortID" type="text" value="@queryConditions.ShortID" class="inputQuery"/>
+
+            <label for="Name" class="labelQuery">Category Name</label>
+            <input name="Name" type="text" value="@queryConditions.Name" class="inputQuery" />
+
+            <label for="SuperiorID" class="labelQuery">Sub-headings</label>
+            @Html.DropDownList("SuperiorID", categories, new { @class = "inputQuery" })
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div class="divTable">
+            @{ var viewResults = ViewBag.ViewResults as List<CategoryViewResult>; }
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Query number</th>
+                    <th class="thVInventory">Category name</th>
+                    <th class="thVInventory">Sub-headings</th>
+                    <th class="thVInventory">Management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    var categoryName = categories.FirstOrDefault(r => r.Value == viewResult.SuperiorID.ToString()).Text;
+                    
+                    <tr>
+                        <td class="tdVInventory">@viewResult.ShortID</td>
+                        <td class="tdVInventory">@viewResult.Name</td>
+                        <td class="tdVInventory">@categoryName</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/category/editpage/@viewResult.ID" class="aVInventory">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('category', 'index', @previousPage)" id="inputPreviousPage" value="Previous page " type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('category','index', null)" id="inputGoToPage" value="Go to " type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('category', 'index', @nextPage)" id="inputNextPage" value="Next page " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name= "Name"]').autocomplete({
+                serviceUrl: '/autocomplete/categories',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}

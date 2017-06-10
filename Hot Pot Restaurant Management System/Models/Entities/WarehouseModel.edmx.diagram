@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f93e706412f4334a6be4c89f83a24e0" Name="Relationship Figure 1">
+        <EntityTypeShape EntityType="WarehouseModel.Category" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WarehouseModel.CreditOrder" PointX="2.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="WarehouseModel.MaterialsRequisition" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WarehouseModel.MaterialsReturnOrder" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WarehouseModel.PurchaseOrder" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WarehouseModel.StocktakingList" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WarehouseModel.TransferOrder" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WarehouseModel.Warehouse" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WarehouseModel.Product" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WarehouseModel.CODetails" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WarehouseModel.InventoryList" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="WarehouseModel.MRDetails" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="WarehouseModel.MRODetails" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WarehouseModel.PODetails" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WarehouseModel.SLDetails" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WarehouseModel.TODetails" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="WarehouseModel.VInventoryList" Width="1.5" PointX="4.75" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

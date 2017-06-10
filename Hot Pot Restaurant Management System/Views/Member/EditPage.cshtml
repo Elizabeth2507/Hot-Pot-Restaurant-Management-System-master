@@ -1,0 +1,49 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model MemberViewResult
+@{ ViewBag.Title = "Edit member"; Layout = "~/Views/Shared/FrontDesk_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/member/index">Member inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/member/addpage">Add member</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td  id="tdContent">
+    <div id="divContent">
+        <div>
+            @{ Html.BeginForm("Edit", "Member", new { id = Model.ID }, FormMethod.Post); }
+
+            <div>
+                @Html.LabelFor(w => w.ID)
+                <span class="spanLong">@Model.ID</span>
+
+                @Html.LabelFor(w => w.Name)
+                @Html.TextBoxFor(w => w.Name)
+
+                @Html.LabelFor(w => w.Tele)
+                @Html.TextBoxFor(w => w.Tele)
+
+                @Html.LabelFor(w => w.Point)
+                @Html.TextBoxFor(w => w.Point)
+            </div>
+
+            <div><span id="ValidationSpan"></span></div>
+            <div>@Html.ValidationSummary()</div>
+            <br />
+            <input type="submit" value="Save changes" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div>
+            <br />
+            @{ Html.BeginForm("Delete", "Member", new { id = Model.ID }, FormMethod.Post); }
+            <input type="submit" value="Delete" class="inputSubmit" style="color: red" />
+            @{ Html.EndForm(); }
+        </div>
+    </div>
+</td>

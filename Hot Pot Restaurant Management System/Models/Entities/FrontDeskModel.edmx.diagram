@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a32dd3d2e3f48c297563cb916b6e296" Name="Relationship Figure 1">
+        <EntityTypeShape EntityType="FrontDeskModel.Dish" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrontDeskModel.ServingTable" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrontDeskModel.BillDetails" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FrontDeskModel.Discount" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrontDeskModel.Bill" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FrontDeskModel.VBill" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrontDeskModel.Member" Width="1.5" PointX="0.75" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Sales trend";
+    Layout = "~/Views/Shared/Report_Layout.cshtml";
+}
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dishanalysis/amountchart">Sales trend</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dishanalysis/moneychart">Sales trends</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dishanalysis/totaldailychart">Total sales trend</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div class="divQuery">
+        @{ Html.BeginForm("GetAmountChart", "DishAnalysis", FormMethod.Get, new { id = "formQuery" }); }
+        <label for="Date" class="labelQuery">Date</label>
+        <input data-val="true" id="inputDateMin" name="DateMin" type="text" value="" class="DatePicker" />
+        ~
+        <input data-val="true" id="inputDateMax" name="DateMax" type="text" value="" class="DatePicker" />
+
+        <input type="button" value="Add dishes" class="inputSubmit" onclick="AddDishQueryBlank()" />
+        <input type="button" value="Inquire" class="inputSubmit" onclick="GetDishChart('amount')" />
+
+        <br />
+
+        <label for="DishName" class="labelQuery">Dish name</label>
+        <input data-val="true" id="inputDishName" name="DishName" type="text" value="" class="inputQuery" />
+        @{ Html.EndForm(); }
+    </div>
+
+    <div id="container" class="divTable"></div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/highcharts.js")
+    @Scripts.Render("~/scripts/autocomplete.js")
+
+    <script>
+        $(document).ready(function () {
+            $('.MonthPicker').datepicker({
+                dateFormat: 'yy-MM',
+                closeText: 'define',
+                monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                monthNamesShort: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "1996:2036",
+                onClose: function () {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month option:selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year option:selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                }
+            });
+
+            $('.DatePicker').datepicker({
+                dateFormat: 'yy-MM-dd',
+                closeText: 'define',
+                monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                monthNamesShort: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: "1996:2036",
+            });
+
+            $('#inputDishName').autocomplete({
+                serviceUrl: '/autocomplete/dishes',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        });
+    </script>
+}

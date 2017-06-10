@@ -1,0 +1,65 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Common.Authentication;
+@model MaterialsRequisitionViewResult
+@{ ViewBag.Title = "Fill in the picklist"; Layout = "~/Views/Shared/OrderCreater_Layout.cshtml"; }
+
+<div id="divContent">
+    <div>
+        @{ var userID = ((UserIdentity)Context.User.Identity).ShortID;
+           var userName = ((UserIdentity)Context.User.Identity).RealName; }
+        @{ Html.BeginForm("mradd", "ordercreater", new { id = Model.ID, date = Model.Date, userID = userID, userName = userName }, FormMethod.Post); }
+
+        <div>
+            @Html.LabelFor(w => w.ID)
+            <span class="spanLong">@Model.ID</span>
+
+            @Html.LabelFor(w => w.WarehouseName)
+            @Html.TextBoxFor(w => w.WarehouseName)
+
+            @Html.LabelFor(w => w.OperatorID)
+            @Html.TextBoxFor(w => w.OperatorID)
+
+            @Html.LabelFor(w => w.OperatorName)
+            @Html.TextBoxFor(w => w.OperatorName)
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.UserID)
+            <span class="spanShort">@userID</span>
+
+            @Html.LabelFor(w => w.UserName)
+            <span class="spanShort">@userName</span>
+
+            @Html.LabelFor(w => w.Date)
+            <span class="spanLong">@Model.Date</span>
+
+            @Html.LabelFor(w => w.Remark)
+            @Html.TextBoxFor(w => w.Remark)
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.Details[0].ProductName)
+            @Html.TextBoxFor(w => w.Details[0].ProductName)
+
+            @Html.LabelFor(w => w.Details[0].POID)
+            @Html.TextBoxFor(w => w.Details[0].POID)
+
+            @Html.LabelFor(w => w.Details[0].Amount)
+            @Html.TextBoxFor(w => w.Details[0].Amount)
+
+            @Html.LabelFor(w => w.Details[0].Unit)
+            @Html.TextBoxFor(w => w.Details[0].Unit)
+        </div>
+
+        <div id="divValidation" class="validation-summary-errors">
+            <ul id="ulValidation"></ul>
+        </div>
+        <div>@Html.ValidationSummary()</div>
+        <br />
+        <input type="submit" value="Save changes" class="inputSubmit" />
+        @{ Html.EndForm(); }
+    </div>
+</div>
+

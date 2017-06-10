@@ -1,0 +1,44 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model WarehouseViewResult
+@{ ViewBag.Title = "Add a warehouse"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/warehouse/index">Warehouse query</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/warehouse/addpage">Add a warehouse</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        <div>
+            @{ Html.BeginForm("Add", "Warehouse", FormMethod.Post, new { id = "formPost" }); }
+
+            <div>
+                @Html.LabelFor(w => w.ShortID)
+                @Html.TextBoxFor(w => w.ShortID)
+
+                @Html.LabelFor(w => w.Name)
+                @Html.TextBoxFor(w => w.Name)
+            </div>
+
+            <div id="divValidation" class="validation-summary-errors">
+                <ul id="ulValidation"></ul>
+            </div>
+            <div>@Html.ValidationSummary()</div>
+            <br />
+            <input type="submit" value="Save changes" class="inputSubmit"/>
+            @{ Html.EndForm(); }
+        </div>
+    </div>
+</td>
+
+
+
+
+

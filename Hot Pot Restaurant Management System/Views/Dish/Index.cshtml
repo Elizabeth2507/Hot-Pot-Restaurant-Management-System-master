@@ -1,0 +1,165 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model DishQueryConditions
+@{ ViewBag.Title = "Dishes inquiries"; Layout = "~/Views/Shared/FrontDesk_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dish/index">Dishes inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dish/addpage">New dishes</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divCenterContent">
+        <div class="divQuery">
+            @{ 
+                var queryConditions = ViewBag.QueryConditions as DishQueryConditions;
+                var categories = ViewBag.Categories as SelectList;
+                var selectBool = ViewBag.SelectBool as SelectList;
+            }
+            @{ Html.BeginForm("Index", "Dish", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="ShortID" class="labelQuery">Query number</label>
+            <input name="ShortID" type="text" value="@queryConditions.ShortID" class="inputQuery" data-val="true" data-val-number="The query number requires a valid number" />
+
+            <label for="Name" class="labelQuery">Dish name</label>
+            <input name="Name" type="text" value="@queryConditions.Name" class="inputQuery" />
+
+            <label for="ShortName" class="labelQuery">Short name</label>
+            <input name="ShortName" type="text" value="@queryConditions.ShortName" class="inputQuery" />
+
+            <label for="CategoryID" class="labelQuery">Category</label>
+            @Html.DropDownList("CategoryID", categories, new { @class = "inputQuery" })
+
+            <label for="Unit" class="labelQuery">Sales unit</label>
+            <input name="Unit" type="text" value="@queryConditions.Unit" class="inputQuery" />
+
+            <br />
+
+            <label for="PriceMin" class="labelQuery">Price min</label>
+            <input name="PriceMin" type="text" value="@queryConditions.PriceMin" class="inputQuery" data-val="true" data-val-number="The price needs a valid number" />
+            ~
+            <label for="PriceMax" class="labelQuery">Price max</label>
+            <input name="PriceMax" type="text" value="@queryConditions.PriceMax" class="inputQuery" data-val="true" data-val-number="The price needs a valid number" />
+
+            <label for="Description" class="labelQuery">Description</label>
+            <input name="Description" type="text" value="@queryConditions.Description" class="inputQuery" />
+
+            <label for="UnitConversion" class="labelQuery">Unit Conversation</label>
+            <input name="UnitConversion" type="text" value="@queryConditions.UnitConversion" class="inputQuery" />
+
+            <br />
+
+            @{                
+                if (Model.IgnoredProperties.Contains("PriceEditable"))
+                {
+                <label for="PriceEditable">Editable price</label>
+                <select data-val="true" data-val-required="Lackofpricesetting" id="PriceEditable" name="PriceEditable">
+                    <option value="true">Yes</option>
+                    <option value="false">Yes</option>
+                    <option selected="selected" value="all">All</option>
+                </select>
+                }
+                else
+                {
+                <label for="PriceEditable">Editable price</label>
+                @Html.DropDownListFor(w => w.PriceEditable, selectBool)
+                }
+
+                if (Model.IgnoredProperties.Contains("InventoryControl"))
+                {
+                <label for="InventoryControl">Inventory Control</label>
+                <select data-val="true" data-val-required="Missing item association settings" id="InventoryControl" name="InventoryControl">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                    <option selected="selected" value="all">All</option>
+                </select>
+                }
+                else
+                {    
+                <label for="InventoryControl">Inventory Control</label>
+                @Html.DropDownListFor(w => w.InventoryControl, selectBool)                    
+                }
+            }
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div class="divTable">
+            @{ var viewResults = ViewBag.ViewResults as List<DishViewResult>; }
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Query number</th>
+                    <th class="thVInventory">Warehouse name</th>
+                    <th class="thVInventory">Short name</th>
+                    <th class="thVInventory">Classification</th>
+                    <th class="thVInventory">Sales unit</th>
+                    <th class="thVInventory">Price</th>
+                    <th class="thVInventory">Description</th>
+                    <th class="thVInventory">Conversion of units</th>
+                    <th class="thVInventory">Editable Price</th>
+                    <th class="thVInventory">Associated goods inventory</th>
+                    <th class="thVInventory">Management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    var categoryName = categories.FirstOrDefault(c => c.Value == viewResult.CategoryID.ToString()).Text;
+                    var priceEditable = viewResult.PriceEditable == true ? "Yes" : "No";
+                    var inventoryControl = viewResult.InventoryControl == true ? "Yes" : "No";
+                    
+                    <tr>
+                        <td class="tdVInventory">@viewResult.ShortID</td>
+                        <td class="tdVInventory">@viewResult.Name</td>
+                        <td class="tdVInventory">@viewResult.ShortName</td>
+                        <td class="tdVInventory">@categoryName</td>
+                        <td class="tdVInventory">@viewResult.Unit</td>
+                        <td class="tdVInventory">@viewResult.Price</td>
+                        <td class="tdVInventory">@viewResult.Description</td>
+                        <td class="tdVInventory">@viewResult.UnitConversion</td>
+                        <td class="tdVInventory">@priceEditable</td>
+                        <td class="tdVInventory">@inventoryControl</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/dish/editpage/@viewResult.ID" class="aVInventory">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('dish', 'index', @previousPage)" id="inputPreviousPage" value="Previous page " type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('dish','index', null)" id="inputGoToPage" value="Go to " type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('dish', 'index', @nextPage)" id="inputNextPage" value="Next page" type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name= "Name"]').autocomplete({
+                serviceUrl: '/autocomplete/dishes',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}

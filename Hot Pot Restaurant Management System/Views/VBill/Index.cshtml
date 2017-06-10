@@ -1,0 +1,97 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model BillViewResult
+@{ ViewBag.Title = "Payment details"; Layout = "~/Views/Shared/Report_Layout.cshtml"; }
+
+<td colspan="2">
+    <div id="divMenu">
+        <div class="divQuery">
+            @{ var queryConditions = ViewBag.QueryConditions as BillQueryConditions; }
+            @{ Html.BeginForm("Index", "VBill", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="TableID" class="labelQuery">Table number</label>
+            <input data-val="true" data-val-number="The table number requires a valid number" name="TableID" type="text" value="@queryConditions.TableID" class="inputQuery" />
+
+            <label for="Date" class="labelQuery">Date</label>
+            <input data-val="true" name="DateMin" type="text" value="@queryConditions.DateMin.ToString("yyyy-MM-dd")" class="DatePicker" />
+            ~
+            <input data-val="true" name="DateMax" type="text" value="@queryConditions.DateMax.ToString("yyyy-MM-dd")" class="DatePicker"/>
+
+            <label for="CustomerCount" class="labelQuery">Number of customer</label>
+            <input data-val="true" data-val-number="The number of customers needs a valid number" name="CustomerCountMin" type="text" value="@queryConditions.CustomerCountMin" class="inputQuery" />
+            ~
+            <input data-val="true" data-val-number="The number of customers needs a valid number" name="CustomerCountMax" type="text" value="@queryConditions.CustomerCountMax" class="inputQuery"/>
+
+            <br />
+
+            <label for="TotalCost" class="labelQuery">Total price</label>
+            <input data-val="true" data-val-number="Price requires a valid number" name="TotalCostMin" type="text" value="@queryConditions.TotalCostMin" class="inputQuery" />
+            ~
+            <input data-val="true" data-val-number="The total price needs a valid number" name="TotalCostMax" type="text" value="@queryConditions.TotalCostMax" class="inputQuery"/>
+
+            <label for="Discount" class="labelQuery">Discount (percentage)</label>
+            <input data-val="true" data-val-number="The discount requires a valid number" name="DiscountMin" type="text" value="@queryConditions.DiscountMin" class="inputQuery" />
+            ~
+            <input data-val="true" data-val-number="The discount requires a valid number" name="DiscountMax" type="text" value="@queryConditions.DiscountMax" class="inputQuery" />
+
+            <label for="ExactCost" class="labelQuery">Actual price</label>
+            <input data-val="true" data-val-number="The actual price needs a valid number" name="ExactCostMin" type="text" value="@queryConditions.ExactCostMin" class="inputQuery"/>
+            ~
+            <input data-val="true" data-val-number="The actual price needs a valid number" name="ExactCostMax" type="text" value="@queryConditions.ExactCostMax" class="inputQuery"/>
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        @{ var viewResults = ViewBag.ViewResults as List<BillViewResult>;
+           var timePeriodDictionary = ViewBag.TimePeriodDictionary as Dictionary<int, string>;
+        }
+        <div class="divTable">
+
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Number</th>
+                    <th class="thVInventory">Table number</th>
+                    <th class="thVInventory">Date</th>
+                    <th class="thVInventory">Number of customers</th>
+                    <th class="thVInventory">Time period</th>
+                    <th class="thVInventory">Total price</th>
+                    <th class="thVInventory">Discount (percentage)</th>
+                    <th class="thVInventory">Discount type</th>
+                    <th class="thVInventory">Actual price</th>
+                    <th class="thVInventory">Payment amount</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    var timePeriod = timePeriodDictionary.FirstOrDefault(d => d.Key == viewResult.TimePeriod).Value;
+                    
+                    <tr>
+                        <td class="tdVInventory">@viewResult.ID</td>
+                        <td class="tdVInventory">@viewResult.TableID</td>
+                        <td class="tdVInventory">@viewResult.Date</td>
+                        <td class="tdVInventory">@viewResult.CustomerCount</td>
+                        <td class="tdVInventory">@timePeriod</td>
+                        <td class="tdVInventory">@viewResult.TotalCost</td>
+                        <td class="tdVInventory">@viewResult.Discount</td>
+                        <td class="tdVInventory">@viewResult.DiscountType</td>
+                        <td class="tdVInventory">@viewResult.ExactCost</td>
+                        <td class="tdVInventory">@viewResult.ReceivedMoney</td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('vbill', 'index', @previousPage)" id="inputPreviousPage" value="Previous page " type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('vbill','index', null)" id="inputGoToPage" value="Go to " type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('vbill', 'index', @nextPage)" id="inputNextPage" value="Next page " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>

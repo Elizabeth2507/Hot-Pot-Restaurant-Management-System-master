@@ -1,0 +1,104 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model ProductViewResult
+@{ ViewBag.Title = "Products inquiries"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/product/index">Products inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/product/addpage">Add products</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divCenterContent">
+        <div class="divQuery">
+            @{ 
+                var queryConditions = ViewBag.QueryConditions as ProductQueryConditions;
+                var categories = ViewBag.Categories as SelectList;
+            }
+            @{ Html.BeginForm("Index", "Product", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="ShortID" class="labelQuery">Query number</label>
+            <input name="ShortID" type="text" value="@queryConditions.ShortID" class="inputQuery" data-val="true" data-val-number="查询编号需要一个有效的数字" />
+
+            <label for="Name" class="labelQuery">Product name</label>
+            <input name="Name" type="text" value="@queryConditions.Name" class="inputQuery" />
+
+            <label for="ShortName" class="labelQuery">Short name</label>
+            <input name="ShortName" type="text" value="@queryConditions.ShortName" class="inputQuery" />
+
+            <label for="CategoryID" class="labelQuery">Category</label>
+            @Html.DropDownList("CategoryID", categories, new { @class = "inputQuery" })
+
+            <label for="Unit" class="labelQuery">Sales unit</label>
+            <input name="Unit" type="text" value="@queryConditions.Unit" class="inputQuery" />
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div class="divTable">
+            @{ var viewResults = ViewBag.ViewResults as List<ProductViewResult>; }
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Query number</th>
+                    <th class="thVInventory">Warehouse name</th>
+                    <th class="thVInventory">Short name</th>
+                    <th class="thVInventory">Category</th>
+                    <th class="thVInventory">Sales unit</th>
+                    <th class="thVInventory">Management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    var categoryName = categories.FirstOrDefault(c => c.Value == viewResult.CategoryID.ToString()).Text;
+                    
+                    <tr>
+                        <td class="tdVInventory">@viewResult.ShortID</td>
+                        <td class="tdVInventory">@viewResult.Name</td>
+                        <td class="tdVInventory">@viewResult.ShortName</td>
+                        <td class="tdVInventory">@categoryName</td>
+                        <td class="tdVInventory">@viewResult.Unit</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/product/editpage/@viewResult.ID" class="aVInventory">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('product', 'index', @previousPage)" id="inputPreviousPage" value="上一页 " type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('product','index', null)" id="inputGoToPage" value="前往 " type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('product', 'index', @nextPage)" id="inputNextPage" value="下一页 " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name = "Name"]').autocomplete({
+                serviceUrl: '/autocomplete/products',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: '查询结果为空',
+            });
+        })
+    </script>
+}

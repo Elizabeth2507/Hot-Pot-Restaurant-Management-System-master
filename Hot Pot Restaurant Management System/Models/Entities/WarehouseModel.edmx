@@ -1,0 +1,715 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WarehouseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WarehouseModelStoreContainer">
+    <EntitySet Name="Category" EntityType="WarehouseModel.Store.Category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CreditOrder" EntityType="WarehouseModel.Store.CreditOrder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MaterialsRequisition" EntityType="WarehouseModel.Store.MaterialsRequisition" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MaterialsReturnOrder" EntityType="WarehouseModel.Store.MaterialsReturnOrder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PurchaseOrder" EntityType="WarehouseModel.Store.PurchaseOrder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StocktakingList" EntityType="WarehouseModel.Store.StocktakingList" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransferOrder" EntityType="WarehouseModel.Store.TransferOrder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Warehouse" EntityType="WarehouseModel.Store.Warehouse" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Product" EntityType="WarehouseModel.Store.Product" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CODetails" EntityType="WarehouseModel.Store.CODetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InventoryList" EntityType="WarehouseModel.Store.InventoryList" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MRDetails" EntityType="WarehouseModel.Store.MRDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MRODetails" EntityType="WarehouseModel.Store.MRODetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PODetails" EntityType="WarehouseModel.Store.PODetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SLDetails" EntityType="WarehouseModel.Store.SLDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TODetails" EntityType="WarehouseModel.Store.TODetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VInventoryList" EntityType="WarehouseModel.Store.VInventoryList" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShortID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SuperiorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CreditOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SupplierName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="WarehouseName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OperatorID" Type="int" Nullable="false" />
+    <Property Name="OperatorName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MaterialsRequisition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="WarehouseName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OperatorID" Type="int" Nullable="false" />
+    <Property Name="OperatorName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MaterialsReturnOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="WarehouseName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OperatorID" Type="int" Nullable="false" />
+    <Property Name="OperatorName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PurchaseOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SupplierName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="WarehouseName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OperatorID" Type="int" Nullable="false" />
+    <Property Name="OperatorName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="StocktakingList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="WarehouseName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OperatorID" Type="int" Nullable="false" />
+    <Property Name="OperatorName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TransferOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OutName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="InName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OperatorID" Type="int" Nullable="false" />
+    <Property Name="OperatorName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Warehouse">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShortID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShortID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ShortName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CODetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="POID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="InventoryList">
+    <Key>
+      <PropertyRef Name="WarehouseID" />
+      <PropertyRef Name="POID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="WarehouseID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="POID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MRDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="POID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MRODetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="POID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PODetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SLDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="POID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TODetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="POID" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VInventoryList">
+    <Key>
+      <PropertyRef Name="POID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductShortID" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="ProductShortName" />
+      <PropertyRef Name="WarehouseID" />
+      <PropertyRef Name="WarehouseShortID" />
+      <PropertyRef Name="WarehouseName" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="Unit" />
+    </Key>
+    <Property Name="POID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductShortID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductShortName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="WarehouseID" Type="int" Nullable="false" />
+    <Property Name="WarehouseShortID" Type="int" Nullable="false" />
+    <Property Name="WarehouseName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Unit" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WarehouseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WarehouseEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="WarehouseModel.Category" />
+          <EntitySet Name="CreditOrder" EntityType="WarehouseModel.CreditOrder" />
+          <EntitySet Name="MaterialsRequisition" EntityType="WarehouseModel.MaterialsRequisition" />
+          <EntitySet Name="MaterialsReturnOrder" EntityType="WarehouseModel.MaterialsReturnOrder" />
+          <EntitySet Name="PurchaseOrder" EntityType="WarehouseModel.PurchaseOrder" />
+          <EntitySet Name="StocktakingList" EntityType="WarehouseModel.StocktakingList" />
+          <EntitySet Name="TransferOrder" EntityType="WarehouseModel.TransferOrder" />
+          <EntitySet Name="Warehouse" EntityType="WarehouseModel.Warehouse" />
+          <EntitySet Name="Product" EntityType="WarehouseModel.Product" />
+          <EntitySet Name="CODetails" EntityType="WarehouseModel.CODetails" />
+          <EntitySet Name="InventoryList" EntityType="WarehouseModel.InventoryList" />
+          <EntitySet Name="MRDetails" EntityType="WarehouseModel.MRDetails" />
+          <EntitySet Name="MRODetails" EntityType="WarehouseModel.MRODetails" />
+          <EntitySet Name="PODetails" EntityType="WarehouseModel.PODetails" />
+          <EntitySet Name="SLDetails" EntityType="WarehouseModel.SLDetails" />
+          <EntitySet Name="TODetails" EntityType="WarehouseModel.TODetails" />
+          <EntitySet Name="VInventoryList" EntityType="WarehouseModel.VInventoryList" />
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ShortID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SuperiorID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="SupplierName" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="WarehouseName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="OperatorID" Nullable="false" Type="Int32" />
+          <Property Name="OperatorName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UserID" Nullable="false" Type="Int32" />
+          <Property Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Date" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+        </EntityType>
+        <EntityType Name="MaterialsRequisition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OperatorID" Nullable="false" />
+          <Property Type="String" Name="OperatorName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MaterialsReturnOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OperatorID" Nullable="false" />
+          <Property Type="String" Name="OperatorName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SupplierName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OperatorID" Nullable="false" />
+          <Property Type="String" Name="OperatorName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StocktakingList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OperatorID" Nullable="false" />
+          <Property Type="String" Name="OperatorName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TransferOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OutName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OperatorID" Nullable="false" />
+          <Property Type="String" Name="OperatorName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Remark" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ShortID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ShortID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShortName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CODetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="OrderID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="POID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="InventoryList">
+          <Key>
+            <PropertyRef Name="WarehouseID" />
+            <PropertyRef Name="POID" />
+          </Key>
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="Int32" Name="WarehouseID" Nullable="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="POID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MRDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="OrderID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="POID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MRODetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="OrderID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="POID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PODetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="OrderID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SLDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="OrderID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="POID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TODetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="OrderID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="POID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VInventoryList">
+          <Key>
+            <PropertyRef Name="POID" />
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductShortID" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="ProductShortName" />
+            <PropertyRef Name="WarehouseID" />
+            <PropertyRef Name="WarehouseShortID" />
+            <PropertyRef Name="WarehouseName" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Unit" />
+          </Key>
+          <Property Type="String" Name="POID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="Int32" Name="ProductShortID" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductShortName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="WarehouseID" Nullable="false" />
+          <Property Type="Int32" Name="WarehouseShortID" Nullable="false" />
+          <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WarehouseModelStoreContainer" CdmEntityContainer="WarehouseEntities">
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.Category)">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ShortID" ColumnName="ShortID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SuperiorID" ColumnName="SuperiorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditOrder">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.CreditOrder)">
+        <MappingFragment StoreEntitySet="CreditOrder">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaterialsRequisition">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.MaterialsRequisition)">
+        <MappingFragment StoreEntitySet="MaterialsRequisition">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaterialsReturnOrder">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.MaterialsReturnOrder)">
+        <MappingFragment StoreEntitySet="MaterialsReturnOrder">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrder">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.PurchaseOrder)">
+        <MappingFragment StoreEntitySet="PurchaseOrder">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StocktakingList">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.StocktakingList)">
+        <MappingFragment StoreEntitySet="StocktakingList">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransferOrder">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.TransferOrder)">
+        <MappingFragment StoreEntitySet="TransferOrder">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OutName" ColumnName="OutName" />
+          <ScalarProperty Name="InName" ColumnName="InName" />
+          <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Warehouse">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.Warehouse)">
+        <MappingFragment StoreEntitySet="Warehouse">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ShortID" ColumnName="ShortID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.Product)">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ShortID" ColumnName="ShortID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CODetails">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.CODetails)">
+        <MappingFragment StoreEntitySet="CODetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="POID" ColumnName="POID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryList">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.InventoryList)">
+        <MappingFragment StoreEntitySet="InventoryList">
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+          <ScalarProperty Name="POID" ColumnName="POID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MRDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.MRDetails)">
+        <MappingFragment StoreEntitySet="MRDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="POID" ColumnName="POID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MRODetails">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.MRODetails)">
+        <MappingFragment StoreEntitySet="MRODetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="POID" ColumnName="POID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PODetails">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.PODetails)">
+        <MappingFragment StoreEntitySet="PODetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SLDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.SLDetails)">
+        <MappingFragment StoreEntitySet="SLDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="POID" ColumnName="POID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TODetails">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.TODetails)">
+        <MappingFragment StoreEntitySet="TODetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="POID" ColumnName="POID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VInventoryList">
+      <EntityTypeMapping TypeName="IsTypeOf(WarehouseModel.VInventoryList)">
+        <MappingFragment StoreEntitySet="VInventoryList">
+          <ScalarProperty Name="POID" ColumnName="POID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductShortID" ColumnName="ProductShortID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductShortName" ColumnName="ProductShortName" />
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+          <ScalarProperty Name="WarehouseShortID" ColumnName="WarehouseShortID" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

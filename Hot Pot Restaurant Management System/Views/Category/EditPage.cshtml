@@ -1,0 +1,52 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model CategoryViewResult
+@{ ViewBag.Title = "Edit classification"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/index">Classification query</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/addpage">Add a new category</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/treepage">Tree view</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        <div>
+            @{ var categories = ViewBag.Categories as SelectList; }
+            @{ Html.BeginForm("Edit", "Category", new { id = Model.ID }, FormMethod.Post); }
+
+            <div>
+                @Html.LabelFor(c => c.ShortID)
+                @Html.TextBoxFor(c => c.ShortID)
+
+                @Html.LabelFor(c => c.Name)
+                @Html.TextBoxFor(c => c.Name)
+
+                @Html.LabelFor(c => c.SuperiorID)
+                @Html.DropDownListFor(c => c.SuperiorID, categories)
+            </div>
+
+            <div id="divValidation" class="validation-summary-errors">
+                <ul id="ulValidation"></ul>
+            </div>
+            <div>@Html.ValidationSummary()</div>
+            <br />
+            <input type="submit" value="Save changes" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div>
+            <br />
+            @{ Html.BeginForm("Delete", "Category", new { id = Model.ID }, FormMethod.Post); }
+            <input type="submit" value="Delete the category" class="inputSubmit" style="color: red" />
+            @{ Html.EndForm(); }
+        </div>
+    </div>
+</td>

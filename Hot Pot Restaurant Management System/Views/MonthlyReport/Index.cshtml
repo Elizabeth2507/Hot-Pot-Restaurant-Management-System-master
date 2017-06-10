@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Report statistics";
+    Layout = "~/Views/Shared/Report_Layout.cshtml";
+}
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/monthlyreport/currentmonthpage">Monthly report</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/monthlyreport/monthlyreportpage?date=@DateTime.Now.ToString("yyyy-MM-dd")">Monthly report</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent"></td>

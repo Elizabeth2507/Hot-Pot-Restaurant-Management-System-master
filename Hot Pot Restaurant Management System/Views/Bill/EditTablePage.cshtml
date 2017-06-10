@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Select the table number";
+    Layout = "~/Views/Shared/Bill_Layout.cshtml";
+}
+
+<div id="divContent">
+    <div>
+        @{ Html.BeginForm("editpage", "bill", FormMethod.Post); }
+        <label>Table number</label>
+        <input id="TableID" name="TableID" type="text" />
+        <div>@Html.ValidationSummary()</div>
+        <br />
+        <input type="submit" value="Save changes" class="inputSubmit" />
+        @{ Html.EndForm(); }
+    </div>
+</div>
+

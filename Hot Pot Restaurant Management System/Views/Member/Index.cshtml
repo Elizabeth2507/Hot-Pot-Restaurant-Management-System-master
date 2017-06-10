@@ -1,0 +1,98 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model MemberViewResult
+@{ ViewBag.Title = "Member inquiries"; Layout = "~/Views/Shared/FrontDesk_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/member/index">Member inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/member/addpage">Add member</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td  id="tdContent">
+    <div id="divCenterContent">
+        <div class="divQuery">
+            @{ var queryConditions = ViewBag.QueryConditions as MemberQueryConditions; }
+            @{ Html.BeginForm("Index", "Member", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="ID" class="labelQuery">Member number</label>
+            <input data-val="true" data-val-number="The member number requires a valid number" name="ID" type="text" value="@queryConditions.ID" class="inputQuery"/>
+
+            <label for="Name" class="labelQuery">Name</label>
+            <input name="Name" type="text" value="@queryConditions.Name" class="inputQuery" />
+
+            <label for="Tele" class="labelQuery">Contact number</label>
+            <input name="Tele" type="text" value="@queryConditions.Tele" class="inputQuery" />
+
+            <label for="Point" class="labelQuery">Point</label>
+            <input name="PointMin" type="text" value="@queryConditions.PointMin" class="inputQuery" />
+            ~
+            <input name="PointMax" type="text" value="@queryConditions.PointMax" class="inputQuery" />
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        <div class="divTable">
+            @{ var viewResults = ViewBag.ViewResults as List<MemberViewResult>; }
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Member number</th>
+                    <th class="thVInventory">Name</th>
+                    <th class="thVInventory">Contact number</th>
+                    <th class="thVInventory">Point</th>
+                    <th class="thVInventory">Management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    <tr>
+                        <td class="tdVInventory">@viewResult.ID</td>
+                        <td class="tdVInventory">@viewResult.Name</td>
+                        <td class="tdVInventory">@viewResult.Tele</td>
+                        <td class="tdVInventory">@viewResult.Point</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/member/editpage/@viewResult.ID" class="aVInventory">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('member', 'index', @previousPage)" id="inputPreviousPage" value="Previous page " type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('member','index', null)" id="inputGoToPage" value="Go to" type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('member', 'index', @nextPage)" id="inputNextPage" value="Next page " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name= "Name"]').autocomplete({
+                serviceUrl: '/autocomplete/membersName',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}
+
+

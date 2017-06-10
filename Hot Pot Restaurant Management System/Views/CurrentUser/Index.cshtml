@@ -1,0 +1,42 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model UserViewResult
+@{ ViewBag.Title = "View user information"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/currentuser/index">View user information</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/currentuser/passwordpage">Change Password</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        <table id="tableCurrentUser">
+            <tr>
+                <td>@Html.LabelFor(w => w.ShortID)</td>
+                <td>@Model.ShortID</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(w => w.UserName)</td>
+                <td>@Model.UserName</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(w => w.Role)</td>
+                <td>@ViewBag.Role</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(w => w.RealName)</td>
+                <td>@Model.RealName</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(w => w.RealPost)</td>
+                <td>@Model.RealPost</td>
+            </tr>
+        </table>
+    </div>
+</td>

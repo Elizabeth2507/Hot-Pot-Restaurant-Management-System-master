@@ -1,0 +1,127 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Models.QueryModels;
+@model VInventoryListViewResult
+@{ ViewBag.Title = "Inventory query"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td colspan="2">
+    <div id="divMenu">
+        <div class="divQuery">
+            @{ var queryConditions = ViewBag.QueryConditions as VInventoryListQueryConditions; }
+            @{ Html.BeginForm("Index", "VInventoryList", FormMethod.Get, new { id = "formQuery" }); }
+            <label for="WarehouseShortID" class="labelQuery">Warehouse query number</label>
+            <input data-val="true" data-val-number="The warehouse query number requires a valid number" name="WarehouseShortID" type="text" value="@queryConditions.WarehouseShortID" class="inputQuery"/>
+
+            <label for="WarehouesName" class="labelQuery">Warehouse name</label>
+            <input name="WarehouseName" type="text" value="@queryConditions.WarehouseName" class="inputQuery" />
+
+            <label for="POID" class="labelQuery">Batch of goods</label>
+            <input data-val="true" data-val-number="The goods batches require a valid number" name="POID" type="text" value="@queryConditions.POID" class="inputQuery" />
+
+            <label for="ProductShortID" class="labelQuery">Goods inquiry number</label>
+            <input data-val="true" data-val-number="The product number requires a valid number" name="ProductShortID" type="text" value="@queryConditions.ProductShortID" class="inputQuery" />
+
+            <br />
+
+            <label for="ProductName" class="labelQuery">Product name</label>
+            <input name="ProductName" type="text" value="@queryConditions.ProductName" class="inputQuery"/>
+
+            <label for="ProductShortName" class="labelQuery">Short name</label>
+            <input name="ProductShortName" type="text" value="@queryConditions.ProductShortName" class="inputQuery" />
+
+            <label for="Amount" class="labelQuery">Quantity</label>
+            <input data-val="true" data-val-number="The number requires a valid number" name="AmountMin" type="text" value="@queryConditions.AmountMin" class="inputQuery" />
+            ~
+            <input data-val="true" data-val-number="The number requires a valid number" name="AmountMax" type="text" value="@queryConditions.AmountMax" class="inputQuery"/>
+
+            <label for="Unit">Sales unit</label>
+            <input name="Unit" type="text" value="@queryConditions.Unit" class="inputQuery"/>
+
+            <input type="submit" value="Inquire" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+        @{ var viewResults = ViewBag.ViewResults as List<VInventoryListViewResult>; }
+        <div class="divTable">
+
+            <table class="tableVInventory">
+                <tr>
+                    <th class="thVInventory">Warehouse query number</th>
+                    <th class="thVInventory">Warehouse name</th>
+                    <th class="thVInventory">Batch of goods</th>
+                    <th class="thVInventory">Goods inquiry number</th>
+                    <th class="thVInventory">Product name</th>
+                    <th class="thVInventory">Short name</th>
+                    <th class="thVInventory">Quantity</th>
+                    <th class="thVInventory">Sales unit</th>
+                    <th class="thVInventory" colspan="5">Inventory management</th>
+                </tr>
+
+                @foreach (var viewResult in viewResults)
+                {
+                    <tr>
+                        <td class="tdVInventory">@viewResult.WarehouseShortID</td>
+                        <td class="tdVInventory">@viewResult.WarehouseName</td>
+                        <td class="tdVInventory">@viewResult.POID</td>
+                        <td class="tdVInventory">@viewResult.ProductShortID</td>
+                        <td class="tdVInventory">@viewResult.ProductName</td>
+                        <td class="tdVInventory">@viewResult.ProductShortName</td>
+                        <td class="tdVInventory">@viewResult.Amount</td>
+                        <td class="tdVInventory">@viewResult.Unit</td>
+
+                        <td class="tdVInventory">
+                            <a href="~/ordercreater/mraddpage?productname=@viewResult.ProductName&poid=@viewResult.POID" class="aVInventory">Picking material</a>
+                        </td>
+                        <td class="tdVInventory">
+                            <a href="~/ordercreater/mroaddpage?productname=@viewResult.ProductName&poid=@viewResult.POID" class="aVInventory">Return material</a>
+                        </td>
+                        <td class="tdVInventory">
+                            <a href="~/ordercreater/sladdpage?productname=@viewResult.ProductName&poid=@viewResult.POID" class="aVInventory">Inventory</a>
+                        </td>
+                        <td class="tdVInventory">
+                            <a href="~/ordercreater/coaddpage?productname=@viewResult.ProductName&poid=@viewResult.POID" class="aVInventory">Return</a>
+                        </td>
+                        <td class="tdVInventory">
+                            <a href="~/ordercreater/toaddpage?productname=@viewResult.ProductName&poid=@viewResult.POID" class="aVInventory">Transfer</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div>
+            @{ 
+                var totalPage = ViewBag.TotalPage;
+                var pageIndex = ViewBag.PageIndex;
+                var previousPage = pageIndex - 1;
+                var nextPage = pageIndex + 1;
+            }
+            <input onclick="GoToPage('vinventorylist', 'index', @previousPage)" id="inputPreviousPage" value="Previous page " type="button" class="inputSubmit"/>
+            <input onclick="GoToPage('vinventorylist','index', null)" id="inputGoToPage" value="Go to " type="button" class="inputSubmit" />
+            <input type="text" id="inputPageIndex" value="@pageIndex" style="width:25px"/>
+            / @totalPage
+            <input onclick="GoToPage('vinventorylist', 'index', @nextPage)" id="inputNextPage" value="Next page " type="button" class="inputSubmit"/>
+        </div>
+    </div>
+</td>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('[name= "WarehouseName"]').autocomplete({
+                serviceUrl: '/autocomplete/warehouses',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+
+            $('[name = "ProductName"]').autocomplete({
+                serviceUrl: '/autocomplete/products',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}

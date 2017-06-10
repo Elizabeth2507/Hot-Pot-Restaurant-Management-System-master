@@ -1,0 +1,52 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model ProductViewResult
+@{ ViewBag.Title = "Add products"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/product/index">Products inquiries</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/product/addpage">Add products</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        <div>
+            @{ var categories = ViewBag.Categories as SelectList; }
+            @{ Html.BeginForm("Add", "Product", FormMethod.Post); }
+
+            <div>
+                @Html.LabelFor(w => w.ShortID)
+                @Html.TextBoxFor(w => w.ShortID)
+
+                @Html.LabelFor(w => w.Name)
+                @Html.TextBoxFor(w => w.Name)
+
+                @Html.LabelFor(w => w.ShortName)
+                @Html.TextBoxFor(w => w.ShortName)
+
+                @Html.LabelFor(w => w.CategoryID)
+                @Html.DropDownListFor(c => c.CategoryID, categories)
+
+                <br />
+                <br />
+
+                @Html.LabelFor(w => w.Unit)
+                @Html.TextBoxFor(w => w.Unit)
+            </div>
+
+            <div id="divValidation" class="validation-summary-errors">
+                <ul id="ulValidation"></ul>
+            </div>
+            <div>@Html.ValidationSummary()</div>
+            <br />
+            <input type="submit" value="Save changes" class="inputSubmit" />
+            @{ Html.EndForm(); }
+        </div>
+    </div>
+</td>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Dishes analysis";
+    Layout = "~/Views/Shared/Report_Layout.cshtml";
+}
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dishanalysis/amountchart">Sales trend</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dishanalysis/moneychart">Sales trends</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/dishanalysis/totaldailychart">Total sales trend</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="container"></div>
+</td>

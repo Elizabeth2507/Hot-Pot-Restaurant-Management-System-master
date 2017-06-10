@@ -1,0 +1,103 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@using Hot_Pot_Restaurant_Management_System.Common.Authentication;
+@model BillViewResult
+@{ ViewBag.Title = "Order"; Layout = "~/Views/Shared/Bill_Layout.cshtml"; }
+
+<div id="divContent">
+    <div>
+        @{ var userID = ((UserIdentity)Context.User.Identity).ShortID;
+           var userName = ((UserIdentity)Context.User.Identity).RealName; }
+        @{ var rowDetailsCount = 0; }
+        @if (Model.Details != null)
+        {
+            rowDetailsCount = Model.Details.Count() - 1;
+        }
+
+        @{ var timePeriods = ViewBag.TimePeriods as IEnumerable<SelectListItem>; }
+        @{ Html.BeginForm("add", "bill", new { id = Model.ID, date = Model.Date, userID = userID, userName = userName }, FormMethod.Post, new { id = "formPost" }); }
+
+        <div id="divEdit">
+            @Html.LabelFor(w => w.ID)
+            <span class="spanLong">@Model.ID</span>
+
+            @Html.LabelFor(w => w.TableID)
+            @Html.TextBoxFor(w => w.TableID)
+
+            @Html.LabelFor(w => w.CustomerCount)
+            @Html.TextBoxFor(w => w.CustomerCount)
+
+            @Html.LabelFor(w => w.TimePeriod)
+            @Html.DropDownListFor(w => w.TimePeriod, timePeriods)
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.UserID)
+            <span class="spanShort">@userID</span>
+
+            @Html.LabelFor(w => w.UserName)
+            <span class="spanShort">@userName</span>
+
+            @Html.LabelFor(w => w.Date)
+            <span class="spanLong">@Model.Date</span>
+
+            @Html.LabelFor(w => w.Remark)
+            @Html.TextBoxFor(w => w.Remark)
+
+            <br />
+            <br />
+
+            @Html.LabelFor(w => w.Details[0].DishName)
+            @Html.TextBoxFor(w => w.Details[0].DishName)
+
+            @Html.LabelFor(w => w.Details[0].Amount)
+            @Html.TextBoxFor(w => w.Details[0].Amount)
+
+            <br />
+            <br />
+
+            @for (int i = 1; i < rowDetailsCount + 1; i++)
+            {
+                var divID = "divNewEdit" + i;
+                var buttonDeleteID = "buttonDelete" + i;
+                
+                <div id="@divID">
+                    @Html.LabelFor(w => w.Details[i].DishName)
+                    @Html.TextBoxFor(w => w.Details[i].DishName)
+
+                    @Html.LabelFor(w => w.Details[i].Amount)
+                    @Html.TextBoxFor(w => w.Details[i].Amount)
+
+                    <input type="button" value ="delete" onclick="DeleteEditBlanks(@i, @rowDetailsCount)" class ="inputSubmit" id="@buttonDeleteID" />
+
+                    <br />
+                    <br />
+                </div> 
+            }
+        </div>
+
+        <div id="divValidation" class="validation-summary-errors">
+            <ul id="ulValidation"></ul>
+        </div>
+        <div>@Html.ValidationSummary()</div>
+        <br />
+        <input type="button" value="Add dishes" class="inputSubmit" onclick="CreateEditBlanks(@rowDetailsCount)" />
+        <input type="submit" value="Save changes" class="inputSubmit" onclick="return CheckForm()" />
+        @{ Html.EndForm(); }
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/scripts/autocomplete.js")
+    <script>
+        $(function () {
+            $('#Details_0__DishName').autocomplete({
+                serviceUrl: '/autocomplete/dishes',
+                deferRequestBy: 100,
+                noCache: true,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'The query results are empty',
+            });
+        })
+    </script>
+}

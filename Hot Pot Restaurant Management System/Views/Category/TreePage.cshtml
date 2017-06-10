@@ -1,0 +1,28 @@
+﻿@using Hot_Pot_Restaurant_Management_System.Common.Interfaces;
+@using Hot_Pot_Restaurant_Management_System.Common;
+@using Hot_Pot_Restaurant_Management_System.Models.ViewModels;
+@model CategoryViewResult
+@{ ViewBag.Title = "Tree view"; Layout = "~/Views/Shared/Warehouse_Layout.cshtml"; }
+
+<td>
+    <div id="divMenu">
+        <table id="tableMenu">
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/index">Classification query</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/addpage">Add a new category</a></td>
+            </tr>
+            <tr class="trMenu">
+                <td class="tdMenu"><a href="~/category/treepage">Tree view</a></td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td id="tdContent">
+    <div id="divContent">
+        @Html.TreeView((ITreeView)ViewBag.TreeRoot, "category")
+    </div>    
+</td>
+
+
